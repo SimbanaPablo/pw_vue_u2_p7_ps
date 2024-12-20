@@ -1,13 +1,16 @@
 <template>
-    <h2>{{ titulo }}</h2>
+    <h2>{{ encabezado }} : {{ valor2 }}</h2>
     <p>{{ this.numero }} <sup>2</sup> = {{ calcularCuadradoComputado }}</p>
     <p>{{ this.numero }} <sup>2</sup> = {{ calcularCuadradoComputado }}</p>
     <p>{{ this.numero }} <sup>2</sup> = {{ calcularCuadradoComputado }}</p>
     <p>{{ this.numero }} <sup>2</sup> = {{ calcularCuadradoComputado }}</p>
     <p>{{ this.numero }} <sup>2</sup> = {{ calcularCuadradoComputado }}</p>
     <div>
-        <button v-on:click="incrementar()">+ 1</button>
+        <button @:click="incrementar()">+ 1</button>
         <button v-on:click="decrementar()">- 1</button>
+    </div>
+    <div v-if="esVerdad">
+        <h1>Feliz Navidad</h1>
     </div>
 
 </template>
@@ -16,7 +19,7 @@
 export default {
     data() {
         return {
-            numero: 20,
+            numero: this.valor,
             titulo: 'Contador'
         }
     },
@@ -38,6 +41,41 @@ export default {
             console.log("entro al metodo computado");
             return this.numero * this.numero;
         }
+    },
+    //primera forma de declaracion de un props
+    //props:['encabezado','valor']
+    props:{
+        //encabezado: String,
+        encabezado:{
+            type:String,
+            validator(value){
+                if(value.includes === 'H'){
+                    
+                }else{
+                    return value;
+                } 
+            }
+
+        },
+        valor: Number,
+        valor2:{
+            type:Number,
+            required:false,
+            default:77,
+            validator(value){
+                //Programo mi validacion bajo mi criterio y retorno true
+                //cuando es valido para mi
+                //retorno false cuando no es valido para mi
+                return value <=77  //retorna true cada vez que cumpla la condicion
+            }
+        },
+        esVerdad:{
+            type: Boolean,
+            required: true
+        },  
+        arreglo:Array,
+        fecha:Date,
+        ObjetoPersona:Object,
     }
 }
 </script>
